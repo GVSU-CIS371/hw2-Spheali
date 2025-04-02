@@ -1,10 +1,11 @@
 <template>
-  <div class="syrup" :style="{backgroundColor:currentBase.color}" v-if="currentSyrup.color === '#c6c6c6'"></div>
-  <div class="syrup" :style="{backgroundColor:currentSyrup.color}" v-else></div>
+  <div class="syrup" :style="{backgroundColor:store.currentSyrup.color}"></div>
 </template>
 
 <script setup lang="ts">
-  import { currentSyrup, currentBase } from "../stores/beverage";
+  import { useBeverageStore } from "../stores/beverageStore";
+
+  const store = useBeverageStore();
 </script>
 
 <style lang="scss" scoped>

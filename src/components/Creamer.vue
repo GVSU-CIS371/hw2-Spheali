@@ -1,11 +1,13 @@
 <template>
   <div class="froth">
-    <div v-for=" in 5" class="foam" :style="{backgroundColor:currentCream.color}"></div>
+    <div v-for=" in 5" class="foam" :style="{backgroundColor:store.currentCream.color}"></div>
   </div>
 </template>
 
 <script setup lang="ts">
-  import { currentCream } from "../stores/beverage";
+  import { useBeverageStore } from "../stores/beverageStore";
+
+  const store = useBeverageStore();
 </script>
 
 <style lang="scss" scoped>
