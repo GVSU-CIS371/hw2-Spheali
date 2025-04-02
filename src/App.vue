@@ -1,16 +1,16 @@
 <template>
   <div>
-    <Beverage :isIced="currentTemp === 'Cold'" :base="currentBase" :cream="currentCream" :syrup="currentSyrup" />
+    <Beverage :isIced="bevStore.currentTemp === 'Cold'" :base="bevStore.currentBase" :cream="bevStore.currentCream" :syrup="bevStore.currentSyrup" />
     <ul>
       <li>
-        <template v-for="temp in temps" :key="temp">
+        <template v-for="temp in bevStore.temps" :key="temp">
           <label>
             <input
               type="radio"
               name="temperature"
               :id="`r${temp}`"
               :value="temp"
-              v-model="currentTemp"
+              v-model="bevStore.currentTemp"
             />
             {{ temp }}
           </label>
@@ -19,14 +19,14 @@
     </ul>
     <ul>
       <li>
-        <template v-for="base in bases" :key="base">
+        <template v-for="base in bevStore.bases" :key="base">
           <label>
             <input
               type="radio"
               name="base"
               :id="base.id"
               :value="base"
-              v-model="currentBase"
+              v-model="bevStore.currentBase"
             />
             {{ base.name }}
           </label>
@@ -35,14 +35,14 @@
     </ul>
     <ul>
       <li>
-        <template v-for="cream in creamers" :key="cream">
+        <template v-for="cream in bevStore.creamers" :key="cream">
           <label>
             <input
               type="radio"
               name="cream"
               :id="cream.id"
               :value="cream"
-              v-model="currentCream"
+              v-model="bevStore.currentCream"
             />
             {{ cream.name }}
           </label>
@@ -51,14 +51,14 @@
     </ul>
     <ul>
       <li>
-        <template v-for="syrup in syrups" :key="syrup">
+        <template v-for="syrup in bevStore.syrups" :key="syrup">
           <label>
             <input
               type="radio"
               name="syrup"
               :id="syrup.id"
               :value="syrup"
-              v-model="currentSyrup"
+              v-model="bevStore.currentSyrup"
             />
             {{ syrup.name }}
           </label>
@@ -66,11 +66,16 @@
       </li>
     </ul>
   </div>
+  <div>
+    
+  </div>
 </template>
 
 <script setup lang="ts">
 import Beverage from "./components/Beverage.vue";
-import { temps, currentTemp, bases, currentBase, creamers, currentCream, syrups, currentSyrup } from "./stores/beverage";
+import { useBeverageStore } from "./stores/beverageStore";
+
+const bevStore = useBeverageStore();
 </script>
 
 <style lang="scss">
