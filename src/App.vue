@@ -66,8 +66,27 @@
       </li>
     </ul>
   </div>
-  <div>
-    
+  <div id="make_bev">
+    <input v-model="bevStore.bevName" type="text" placeholder="Enter Name" ></input>
+    <button @click="bevStore.makeBeverage()">Make Beverage</button>
+  </div>
+  <div id="beverage_container">
+    <ul>
+      <li>
+        <template v-for="bev in bevStore.userBev" :key="bev">
+          <label>
+            <input
+              type="radio"
+              name="base"
+              :id="bev.id"
+              :value="bev"
+              v-model="bevStore.currentBev"
+            />
+            {{ bev.name }}
+          </label>
+        </template>
+      </li>
+    </ul>
   </div>
 </template>
 

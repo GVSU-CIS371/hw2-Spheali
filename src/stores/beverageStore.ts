@@ -14,12 +14,13 @@ interface BeverageState {
   currentCream: CreamerType,
   syrups: SyrupType[],
   currentSyrup: SyrupType,
-  userBev: BeverageType[]|null,
-  currentBev: BeverageType|null
+  userBev: BeverageType[],
+  bevName: string,
+  currentBev: BeverageType
 }
 
 export const useBeverageStore = defineStore("BeverageStore", {
-  state: () => ({
+  state: (): BeverageState => ({
     temps: tempretures,
     currentTemp: tempretures[0],
     bases: bases,
@@ -28,16 +29,45 @@ export const useBeverageStore = defineStore("BeverageStore", {
     currentCream: creamers[0],
     syrups: syrups,
     currentSyrup: syrups[0],
-    userBev: null,
-    currentBev: null
+    userBev: [],
+    bevName: "",
+    currentBev: { id: '-1',
+      name: "Default",
+      temp: tempretures[0],
+      base: bases[0],
+      syrup: syrups[0],
+      creamer: creamers[0] 
+    }
   }),
 
   actions: {
     makeBeverage() {
-      
+      if(this.userBev === null) {
+        this.userBev = [{
+          id: '0',
+          name: this.bevName,
+          temp: this.currentTemp,
+          base: this.currentBase,
+          syrup: this.currentSyrup,
+          creamer: this.currentCream
+        }]
+      }
+      else {
+        this.userBev.push({
+          id: this.userBev.length.toString(),
+          name: this.bevName,
+          temp: this.currentTemp,
+          base: this.currentBase,
+          syrup: this.currentSyrup,
+          creamer: this.currentCream
+        })
+      }
     },
     showBeverage() {
-
+      this.currentTemp = this.currentBev.temp;
+      this.currentBase = this.currentBev.base;
+      this.currentCream = this.currentBev.creamer;
+      this.currentSyrup = this.currentBev.syrup;
     },
   },
 });
