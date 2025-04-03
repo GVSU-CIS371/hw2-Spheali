@@ -68,7 +68,7 @@
   </div>
   <div id="make_bev">
     <input v-model="bevStore.bevName" type="text" placeholder="Enter Name" ></input>
-    <button @click="bevStore.makeBeverage()">Make Beverage</button>
+    <button @click="bevStore.makeBeverage(); bevStore.currentBev = bevStore.userBev[bevStore.userBev.length-1]; bevStore.bevName = ''">Make Beverage</button>
   </div>
   <div id="beverage_container">
     <ul>
@@ -77,10 +77,11 @@
           <label>
             <input
               type="radio"
-              name="base"
+              name="bev"
               :id="bev.id"
               :value="bev"
               v-model="bevStore.currentBev"
+              v-on:click="bevStore.showBeverage()"
             />
             {{ bev.name }}
           </label>

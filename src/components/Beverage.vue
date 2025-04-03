@@ -9,7 +9,7 @@
         <Creamer v-else/>
       </template>
       <template v-slot:mid>
-        <Base v-if="store.currentSyrup.name === 'No Syrup'"/>
+        <Base v-if="store.currentSyrup.name === 'No Syrup' || store.currentCream.name === 'No Cream'"/>
         <Syrup v-else/>
       </template>
       <template v-slot:bottom>
